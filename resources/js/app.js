@@ -1,11 +1,11 @@
 import './bootstrap';
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
-window.Vue = require('vue').default;
-Vue.component('file-manager', require('laravel-file-manager'));
-const app = new Vue({
-    el: '#app',
-});
+// window.Vue = require('vue').default;
+// Vue.component('file-manager', require('laravel-file-manager'));
+// const app = new Vue({
+//     el: '#app',
+// });
 //window.Pusher = Pusher;
 
 // window.Echo = new Echo({

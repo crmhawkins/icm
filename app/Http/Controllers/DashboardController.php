@@ -53,7 +53,7 @@ class DashboardController extends Controller
 
 
 
-
+        return view('dashboards.dashboardFactura' );
         switch($acceso){
             case(1):
                  // Obtener las fechas de la solicitud, o asignar fechas predeterminadas si no están presentes
