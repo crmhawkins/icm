@@ -78,7 +78,7 @@
                             <td>{{$user->departamento}}</td>
                             <td>{{$user->cargo}}</td>
                             <td class="flex flex-row justify-evenly align-middle" style="min-width: 120px">
-                                <a class="" href="{{route('users.show', $user->id)}}"><img src="{{asset('assets/icons/eye.svg')}}" alt="Mostrar usuario"></a>
+                                {{-- <a class="" href="{{route('users.show', $user->id)}}"><img src="{{asset('assets/icons/eye.svg')}}" alt="Mostrar usuario"></a> --}}
                                 <a class="" href="{{route('users.edit', $user->id)}}"><img src="{{asset('assets/icons/edit.svg')}}" alt="Mostrar usuario"></a>
                                 <a class="delete" data-id="{{$user->id}}" href=""><img src="{{asset('assets/icons/trash.svg')}}" alt="Mostrar usuario"></a>
                             </td>

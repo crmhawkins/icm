@@ -624,7 +624,7 @@
                         </li>
                     </ul>
                 </li> --}}
-                {{-- <li class="sidebar-item has-sub {{ $personalActive ? 'active' : '' }}">
+                <li class="sidebar-item has-sub {{ $personalActive ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i class="fa-solid fa-user-group fs-5"></i>
                         <span>Personal</span>
@@ -647,7 +647,7 @@
                             </a>
                         </li>
                     </ul>
-                </li> --}}
+                </li>
                 {{-- <li class="sidebar-item has-sub {{ $EmailConfig ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i class="fa-solid fa-sliders fs-5"></i>
