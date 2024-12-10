@@ -50,10 +50,24 @@ class DashboardController extends Controller
             $pausaActiva = $jornadaActiva->pausasActiva();
         }
 
+        $clientes = Client::where('is_client',true)->get();
+        $budgets = Budget::where('admin_user_id',$id)->get();
+        $projects = Project::where('admin_user_id',$id)->get();
 
-
-
-        return view('dashboards.dashboardFactura' );
+        return view('dashboards.dashboardFactura', compact(
+            'user',
+            'to_dos',
+            'budgets',
+            'projects',
+            'clientes',
+            'users',
+            'events',
+            'timeWorkedToday',
+            'jornadaActiva',
+            'pausaActiva',
+            'llamadaActiva',
+            'to_dos_finalizados'
+        ));
         switch($acceso){
             case(1):
                  // Obtener las fechas de la solicitud, o asignar fechas predeterminadas si no están presentes

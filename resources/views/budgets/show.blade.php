@@ -152,10 +152,7 @@
     </div>
 </div>
 
-    {{-- <!--  BEGIN CUSTOM SCRIPTS FILE  -->
-    <x-slot:footerFiles>
-         @vite(['resources/assets/js/apps/invoice-preview.js'])
-    </x-slot> --}}
+
 @endsection
 
 @section('scripts')
@@ -214,7 +211,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Ocurrió un error al generar la tarea. Por favor, inténtalo de nuevo.',
+                        text: 'Ocurrió un error al descargar el archivo. Por favor, inténtalo de nuevo.',
                         toast: true,
                         position: 'top-end',
                         showConfirmButton: false,

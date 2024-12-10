@@ -10,6 +10,7 @@ use App\Models\Clients\Client;
 use App\Models\Contratos\Contrato;
 use App\Models\Holidays\Holidays;
 use App\Models\Holidays\HolidaysPetitions;
+use App\Models\Invoices\Invoice;
 use App\Models\Llamadas\Llamada;
 use App\Models\Nominas\Nomina;
 use App\Models\Projects\Project;
@@ -119,6 +120,12 @@ class User extends Authenticatable
     }
     public function presupuestos(){
         return $this->hasMany(\App\Models\Budgets\Budget::class, 'admin_user_id');
+    }
+    public function facturas(){
+        return $this->hasMany(Invoice::class, 'admin_user_id');
+    }
+    public function facturasPorEstado($estadoId) {
+        return $this->facturas()->where('invoice_status_id', $estadoId)->get();
     }
     public function presupuestosPorEstado($estadoId) {
         return $this->presupuestos()->where('budget_status_id', $estadoId)->get();

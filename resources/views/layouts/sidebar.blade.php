@@ -100,30 +100,12 @@
                         </li>
                     </ul>
                 </li>
-                {{-- <li class="sidebar-item has-sub {{ $peticionesActive ? 'active' : '' }}">
-                    <a href="#" class='sidebar-link'>
-                        <i class="fa-solid fa-clipboard fs-5"></i>
-                        <span>Peticiones</span>
+                <li class="sidebar-item {{ request()->routeIs('facturas.index') ? 'active' : '' }}">
+                    <a href="{{route('facturas.index')}}" class='sidebar-link'>
+                        <i class="fa-solid fa-file-invoice-dollar fs-5"></i>
+                        <span>Facturas</span>
                     </a>
-                    <ul class="submenu" style="{{ $peticionesActive ? 'display:block;' : 'display:none;' }}">
-                        <li class="submenu-item {{ request()->routeIs('peticion.index') ? 'active' : '' }}">
-                            <a href="{{route('peticion.index')}}">
-                                <i class="fa-solid fa-list"></i>
-                                <span>
-                                    Ver todos
-                                </span>
-                            </a>
-                        </li>
-                        <li class="submenu-item {{ request()->routeIs('peticion.create') ? 'active' : '' }}">
-                            <a href="{{route('peticion.create')}}">
-                                <i class="fa-solid fa-plus"></i>
-                                <span>
-                                    Crear petición
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </li> --}}
+                </li>
                 <li class="sidebar-item has-sub {{ $projectActive ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i class="fa-solid fa-diagram-project fs-5"></i>
@@ -148,6 +130,124 @@
                         </li>
                     </ul>
                 </li>
+                <li class="sidebar-item has-sub {{ $poveedoresActive ? 'active' : '' }}">
+                    <a href="#" class='sidebar-link'>
+                        <i class="fa-solid fa-user-tie fs-5"></i>
+                        <span>Proveedores</span>
+                    </a>
+                    <ul class="submenu" style="{{ $poveedoresActive ? 'display:block;' : 'display:none;' }}">
+                        <li class="submenu-item {{ request()->routeIs('proveedores.index') ? 'active' : '' }}">
+                            <a href="{{route('proveedores.index')}}">
+                                <i class="fa-solid fa-list"></i>
+                                <span>
+                                    Ver todos
+                                </span>
+                            </a>
+                        </li>
+                        <li class="submenu-item {{ request()->routeIs('proveedores.create') ? 'active' : '' }}">
+                            <a href="{{route('proveedores.create')}}">
+                                <i class="fa-solid fa-plus"></i>
+                                <span>
+                                    Crear nuevo
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item has-sub {{ $servicesActive ? 'active' : '' }}">
+                    <a href="#" class='sidebar-link'>
+                        <i class="fa-solid fa-sliders fs-5"></i>
+                        <span>Servicios</span>
+                    </a>
+                    <ul class="submenu" style="{{ $servicesActive ? 'display:block;' : 'display:none;' }}">
+                        <li class="submenu-item {{ request()->routeIs('servicios.index') ? 'active' : '' }}">
+                            <a href="{{route('servicios.index')}}">
+                                <i class="fa-solid fa-list"></i>
+                                <span>
+                                    Ver todos
+                                </span>
+                            </a>
+                        </li>
+                        <li class="submenu-item {{ request()->routeIs('servicios.create') ? 'active' : '' }}">
+                            <a href="{{route('servicios.create')}}">
+                                <i class="fa-solid fa-plus"></i>
+                                <span>
+                                    Crear servicio
+                                </span>
+                            </a>
+                        </li>
+                        <li class="submenu-item {{ request()->routeIs('serviciosCategoria.index') ? 'active' : '' }}">
+                            <a href="{{route('serviciosCategoria.index')}}">
+                                <i class="fa-solid fa-list"></i>
+                                <span>
+                                    Ver Categorias
+                                </span>
+                            </a>
+                        </li>
+                        <li class="submenu-item {{ request()->routeIs('serviciosCategoria.create') ? 'active' : '' }}">
+                            <a href="{{route('serviciosCategoria.create')}}">
+                                <i class="fa-solid fa-plus"></i>
+                                <span>
+                                    Crear categoria de servicio
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item has-sub {{ request()->routeIs('logs.*') ? 'active' : '' }}">
+                    <a href="#" class='sidebar-link'>
+                        <i class="fa-solid fa-list"></i>
+                        <span>Logs</span>
+                    </a>
+                    <ul class="submenu" style="{{ request()->routeIs('logs.*') ? 'display:block;' : 'display:none;' }}">
+                        <li class="submenu-item {{ request()->routeIs('logs.index') ? 'active' : '' }}">
+                            <a href="{{route('logs.index')}}">
+                                <i class="fa-solid fa-list"></i>
+                                <span>
+                                    Ver Logs
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item has-sub {{ $cofiguracionActive ? 'active' : '' }}">
+                    <a href="#" class='sidebar-link'>
+                        <i class="fa-solid fa-list"></i>
+                        <span>Cofiguracion</span>
+                    </a>
+                    <ul class="submenu" style="{{ $cofiguracionActive ? 'display:block;' : 'display:none;' }}">
+                        <li class="submenu-item {{ request()->routeIs('configuracion.index') ? 'active' : '' }}">
+                            <a href="{{route('configuracion.index')}}" class='sidebar-link'>
+                                <i class="fa-solid fa-gears fs-5"></i>
+                                <span>Cofiguracion Empresa</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {{-- <li class="sidebar-item has-sub {{ $peticionesActive ? 'active' : '' }}">
+                    <a href="#" class='sidebar-link'>
+                        <i class="fa-solid fa-clipboard fs-5"></i>
+                        <span>Peticiones</span>
+                    </a>
+                    <ul class="submenu" style="{{ $peticionesActive ? 'display:block;' : 'display:none;' }}">
+                        <li class="submenu-item {{ request()->routeIs('peticion.index') ? 'active' : '' }}">
+                            <a href="{{route('peticion.index')}}">
+                                <i class="fa-solid fa-list"></i>
+                                <span>
+                                    Ver todos
+                                </span>
+                            </a>
+                        </li>
+                        <li class="submenu-item {{ request()->routeIs('peticion.create') ? 'active' : '' }}">
+                            <a href="{{route('peticion.create')}}">
+                                <i class="fa-solid fa-plus"></i>
+                                <span>
+                                    Crear petición
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li> --}}
                 {{-- <li class="sidebar-item has-sub {{ $tareaActive ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i class="fa-solid fa-list-check fs-5"></i>
@@ -212,30 +312,6 @@
                         </li>
                     </ul>
                 </li> --}}
-                <li class="sidebar-item has-sub {{ $poveedoresActive ? 'active' : '' }}">
-                    <a href="#" class='sidebar-link'>
-                        <i class="fa-solid fa-user-tie fs-5"></i>
-                        <span>Proveedores</span>
-                    </a>
-                    <ul class="submenu" style="{{ $poveedoresActive ? 'display:block;' : 'display:none;' }}">
-                        <li class="submenu-item {{ request()->routeIs('proveedores.index') ? 'active' : '' }}">
-                            <a href="{{route('proveedores.index')}}">
-                                <i class="fa-solid fa-list"></i>
-                                <span>
-                                    Ver todos
-                                </span>
-                            </a>
-                        </li>
-                        <li class="submenu-item {{ request()->routeIs('proveedores.create') ? 'active' : '' }}">
-                            <a href="{{route('proveedores.create')}}">
-                                <i class="fa-solid fa-plus"></i>
-                                <span>
-                                    Crear nuevo
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
                 {{-- <li class="sidebar-item has-sub {{ $actasActive ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i class="fa-solid fa-address-book fs-5"></i>
@@ -260,12 +336,6 @@
                         </li>
                     </ul>
                 </li> --}}
-                <li class="sidebar-item {{ request()->routeIs('facturas.index') ? 'active' : '' }}">
-                    <a href="{{route('facturas.index')}}" class='sidebar-link'>
-                        <i class="fa-solid fa-file-invoice-dollar fs-5"></i>
-                        <span>Facturas</span>
-                    </a>
-                </li>
                 {{-- <li class="sidebar-item {{ request()->routeIs('order.indexAll') ? 'active' : '' }}">
                     <a href="{{route('order.indexAll')}}" class='sidebar-link'>
                         <i class="fa-solid fa-receipt"></i>
@@ -476,22 +546,6 @@
                         <span>Jornadas</span>
                     </a>
                 </li> --}}
-                <li class="sidebar-item has-sub {{ request()->routeIs('logs.*') ? 'active' : '' }}">
-                    <a href="#" class='sidebar-link'>
-                        <i class="fa-solid fa-list"></i>
-                        <span>Logs</span>
-                    </a>
-                    <ul class="submenu" style="{{ request()->routeIs('logs.*') ? 'display:block;' : 'display:none;' }}">
-                        <li class="submenu-item {{ request()->routeIs('logs.index') ? 'active' : '' }}">
-                            <a href="{{route('logs.index')}}">
-                                <i class="fa-solid fa-list"></i>
-                                <span>
-                                    Ver Logs
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
                 {{-- <li class="sidebar-item {{ request()->routeIs('estadistica.index') ? 'active' : '' }}">
                     <a href="{{route('estadistica.index')}}" class='sidebar-link'>
                         <i class="fa-solid fa-chart-line"></i>
@@ -522,46 +576,6 @@
                         </li>
                     </ul>
                 </li> --}}
-                <li class="sidebar-item has-sub {{ $servicesActive ? 'active' : '' }}">
-                    <a href="#" class='sidebar-link'>
-                        <i class="fa-solid fa-sliders fs-5"></i>
-                        <span>Servicios</span>
-                    </a>
-                    <ul class="submenu" style="{{ $servicesActive ? 'display:block;' : 'display:none;' }}">
-                        <li class="submenu-item {{ request()->routeIs('servicios.index') ? 'active' : '' }}">
-                            <a href="{{route('servicios.index')}}">
-                                <i class="fa-solid fa-list"></i>
-                                <span>
-                                    Ver todos
-                                </span>
-                            </a>
-                        </li>
-                        <li class="submenu-item {{ request()->routeIs('servicios.create') ? 'active' : '' }}">
-                            <a href="{{route('servicios.create')}}">
-                                <i class="fa-solid fa-plus"></i>
-                                <span>
-                                    Crear servicio
-                                </span>
-                            </a>
-                        </li>
-                        <li class="submenu-item {{ request()->routeIs('serviciosCategoria.index') ? 'active' : '' }}">
-                            <a href="{{route('serviciosCategoria.index')}}">
-                                <i class="fa-solid fa-list"></i>
-                                <span>
-                                    Ver Categorias
-                                </span>
-                            </a>
-                        </li>
-                        <li class="submenu-item {{ request()->routeIs('serviciosCategoria.create') ? 'active' : '' }}">
-                            <a href="{{route('serviciosCategoria.create')}}">
-                                <i class="fa-solid fa-plus"></i>
-                                <span>
-                                    Crear categoria de servicio
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
                 {{-- <li class="sidebar-item has-sub {{ $departamentoActive ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i class="fa-solid fa-user-group fs-5"></i>
@@ -634,20 +648,6 @@
                         </li>
                     </ul>
                 </li> --}}
-                <li class="sidebar-item has-sub {{ $cofiguracionActive ? 'active' : '' }}">
-                    <a href="#" class='sidebar-link'>
-                        <i class="fa-solid fa-list"></i>
-                        <span>Cofiguracion</span>
-                    </a>
-                    <ul class="submenu" style="{{ $cofiguracionActive ? 'display:block;' : 'display:none;' }}">
-                        <li class="submenu-item {{ request()->routeIs('configuracion.index') ? 'active' : '' }}">
-                            <a href="{{route('configuracion.index')}}" class='sidebar-link'>
-                                <i class="fa-solid fa-gears fs-5"></i>
-                                <span>Cofiguracion Empresa</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
                 {{-- <li class="sidebar-item has-sub {{ $EmailConfig ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
                         <i class="fa-solid fa-sliders fs-5"></i>
