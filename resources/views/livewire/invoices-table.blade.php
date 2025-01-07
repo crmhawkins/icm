@@ -85,7 +85,7 @@
                             'client_id' => 'CLIENTE',
                             'project_id' => 'CAMPAÑA',
                             'created_at' => 'FECHA CREACION',
-                            'expiration_date' => 'FECHA DE EXPIRACION',
+                            'expiration_date' => 'FECHA DE VENCIMIENTO',
                             'invoice_status_id' => 'ESTADO',
                             'total' => 'TOTAL',
                             'admin_user_id' => 'GESTOR',
