@@ -85,6 +85,7 @@
                             'client_id' => 'CLIENTE',
                             'project_id' => 'CAMPAÑA',
                             'created_at' => 'FECHA CREACION',
+                            'expiration_date' => 'FECHA DE EXPIRACION',
                             'invoice_status_id' => 'ESTADO',
                             'total' => 'TOTAL',
                             'admin_user_id' => 'GESTOR',
@@ -108,6 +109,7 @@
                             <td>{{$invoice->cliente->name ??  ($invoice->client_id ? 'Cliente borrado' : 'Sin cliente asignado')}}</td>
                             <td>{{$invoice->project->name ?? ($invoice->project_id ? 'Campaña borrada' : 'Sin campaña asignada')}}</td>
                             <td>{{Carbon\Carbon::parse($invoice->created_at)->format('d/m/Y')}}</td>
+                            <td>{{Carbon\Carbon::parse($invoice->expiration_date)->format('d/m/Y')}}</td>
                             <td>{{$invoice->invoiceStatus->name ?? ($invoice->invoice_status_id ? 'Estado borrado' : 'Sin estado asignado')}}</td>
                             <td>{{number_format((float)$invoice->total, 2, '.', '') }}€</td>
                             <td>{{$invoice->adminUser->name ?? ($invoice->admin_user_id ? 'Gestor borrado' : 'Sin gestor asignado')}}</td>

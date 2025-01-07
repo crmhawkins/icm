@@ -406,7 +406,9 @@ class InvoiceController extends Controller
 
         // Asignamos la fecha
         $fecha = Carbon::parse($factura->created_at)->format('Y-m-d');
+        $fechafinal = Carbon::parse($factura->expiration_date)->format('Y-m-d');
         $fac->setIssueDate($fecha);
+        $fac->setBillingPeriod($fecha, $fechafinal);
 
         // Incluimos los datos del vendedor
         $fac->setSeller(new FacturaeParty([
@@ -417,6 +419,42 @@ class InvoiceController extends Controller
             "town"      => $empresa->town,
             "province"  => $empresa->province
         ]));
+
+        if ($cliente->tipoCliente == 1) {
+            $camposRequeridos = [
+                'CIF' => $cliente->cif,
+                'Nombre' => $cliente->name,
+                'Primer Apellido' => $cliente->primerApellido,
+                'Segundo Apellido' => $cliente->segundoApellido,
+                'Dirección' => $cliente->address,
+                'Código Postal' => $cliente->zipcode,
+                'Ciudad' => $cliente->city,
+                'Provincia' => $cliente->province
+            ];
+        } else {
+            $camposRequeridos = [
+                'CIF' => $cliente->cif,
+                'Nombre de la Empresa' => $cliente->company,
+                'Dirección' => $cliente->address,
+                'Código Postal' => $cliente->zipcode,
+                'Ciudad' => $cliente->city,
+                'Provincia' => $cliente->province
+            ];
+        }
+
+        // Verificar si hay algún campo vacío
+        $camposFaltantes = [];
+        foreach ($camposRequeridos as $campo => $valor) {
+            if (empty($valor)) {
+                $camposFaltantes[] = $campo;
+            }
+        }
+        if (!empty($camposFaltantes)) {
+            $mensaje = "Por favor, rellena los siguientes campos: " . implode(", ", $camposFaltantes);
+
+            return response()->json(['error' => $mensaje, 'status' => false]);
+
+        }
 
         if($cliente->tipoCliente == 1){
             $fac->setBuyer(new FacturaeParty([
@@ -470,16 +508,12 @@ class InvoiceController extends Controller
         $contrasena = $empresa->contrasena;
 
         if (empty($certificado)) {
-            return redirect()->back()->with('toast', [
-                'icon' => 'error',
-                'mensaje' => 'Falta el certificado.'
-            ]);
+            return response()->json(['error' => 'Falta el certificado.', 'status' => false]);
+
         }
         if (empty($contrasena)) {
-            return redirect()->back()->with('toast', [
-                'icon' => 'error',
-                'mensaje' => 'Falta la contraseña del certificado.'
-            ]);
+            return response()->json(['error' => 'Falta la contraseña del certificado.', 'status' => false]);
+
         }
 
         $encryptedStore = file_get_contents(asset('storage/'.$certificado));
