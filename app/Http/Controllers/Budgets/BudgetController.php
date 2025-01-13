@@ -166,6 +166,8 @@ class BudgetController extends Controller
         $data['budget_status_id'] = 1;
         $data['reference'] = $referenceTemp;
         $data['creation_date'] = Carbon::now();
+        $data['iva_percentage'] = 4;
+
         $petitionId = $request->petitionId;
 
         $budgetCreado = Budget::create($data);

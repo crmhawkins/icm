@@ -214,7 +214,7 @@
                         <th style="text-align:center">Bruto</th>
                         <th style="text-align:center">Dto.</th>
                         <th style="text-align:center">Base</th>
-                        <th style="text-align:center">IVA {{ $budget->iva_percentage }}%</th>
+                        <th style="text-align:center">IPSI {{ $budget->iva_percentage }}%</th>
                         <th style="text-align:right">TOTAL</th>
                     </tr>
                     <tr>

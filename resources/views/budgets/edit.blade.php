@@ -308,8 +308,8 @@
                                                 <!--<th>Retenciones %</th>-->
                                                 <th>Descuento</th>
                                                 <th>Base</th>
-                                                <th>% IVA</th>
-                                                <th>IVA</th>
+                                                <th>% IPSI</th>
+                                                <th>IPSI</th>
                                                 <th>TOTAL</th>
                                                 </tr>
                                             </thead>

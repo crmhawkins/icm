@@ -491,7 +491,7 @@ class InvoiceController extends Controller
                     "discounts" => [
                           ["reason" => "Descuento", "amount" => $concepto->discount]
                     ],
-                    "taxes" => [Facturae::TAX_IVA => $factura->iva_percentage]
+                    "taxes" => [Facturae::TAX_IPSI => $factura->iva_percentage]
                 ]));
             }else {
                 $fac->addItem(new FacturaeItem([
@@ -499,7 +499,7 @@ class InvoiceController extends Controller
                     "name" => $concepto->title,
                     "unitPriceWithoutTax" => $concepto->total_no_discount / $concepto->units,
                     "quantity" => $concepto->units,
-                    "taxes" => [Facturae::TAX_IVA => $factura->iva_percentage]
+                    "taxes" => [Facturae::TAX_IPSI => $factura->iva_percentage]
                 ]));
             }
 
