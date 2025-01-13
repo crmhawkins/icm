@@ -701,7 +701,7 @@
             <div class="sidebar-footer mt-3">
                 <p>
                     <b>Clientes:</b> <br> {{App\Models\Clients\Client::all()->count()}} / ILIMITADO<br>
-                    <b>Facturas:</b> <br> {{App\Models\invoices\invoice::all()->count()}} / ILIMITADO<br>
+                    <b>Facturas:</b> <br> {{App\Models\Invoices\Invoice::all()->count()}} / ILIMITADO<br>
                     <b>Categorias:</b> <br> {{App\Models\Services\ServiceCategories::all()->count()}} / ILIMITADO<br>
                     <b>Servicos:</b> <br> {{App\Models\Services\Service::all()->count()}} / ILIMITADO<br>
                 </p>
