@@ -698,6 +698,20 @@
 
 
             </ul>
+            <div class="sidebar-footer mt-3">
+                <p>
+                    <b>Clientes:</b> <br> {{App\Models\Clients\Client::all()->count()}} / ILIMITADO<br>
+                    <b>Facturas:</b> <br> {{App\Models\invoices\invoice::all()->count()}} / ILIMITADO<br>
+                    <b>Categorias:</b> <br> {{App\Models\Services\ServiceCategories::all()->count()}} / ILIMITADO<br>
+                    <b>Servicos:</b> <br> {{App\Models\Services\Service::all()->count()}} / ILIMITADO<br>
+                </p>
+
+                <p>
+                    <b>Versión de software:</b> <br> 5.0.1<br>
+                    <b>Build:</b> <br> 3.0.1<br>
+                    <b>Versión de la IU:</b> <br> 2.5
+                </p>
+            </div>
         </div>
         {{-- <button class="sidebar-toggler btn x"><i data-feather="x"></i></button> --}}
     </div>
