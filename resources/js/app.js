@@ -1,28 +1,8 @@
 import './bootstrap';
-import Echo from 'laravel-echo';
-import Pusher from 'pusher-js';
-window.Vue = require('vue').default;
-Vue.component('file-manager', require('laravel-file-manager'));
-const app = new Vue({
-    el: '#app',
-});
-//window.Pusher = Pusher;
+import { createApp } from 'vue';
+import ExampleComponent from './components/ExampleComponent.vue';
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: import.meta.env.VITE_PUSHER_APP_KEY,
-//     cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
-//     wsHost: import.meta.env.VITE_PUSHER_HOST || window.location.hostname,
-//     wsPort: import.meta.env.VITE_PUSHER_PORT || 6005,
-//     forceTLS: import.meta.env.VITE_PUSHER_SCHEME === 'https',
-//     disableStats: true,
-// });
+const app = createApp({});
+app.component('example-component', ExampleComponent);
+app.mount('#app');
 
-// document.addEventListener('DOMContentLoaded', function () {
-//     // console.log('Echo:', window.Echo); // Verificar que Echo está definido
-//     if (window.Echo) {
-//         window.Echo.channel('pagina-recarga')
-//     } else {
-//         console.error('Echo no está definido');
-//     }
-// });

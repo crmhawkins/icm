@@ -19,8 +19,12 @@ use App\Models\Llamadas\Llamada;
 use App\Models\Notes\Note;
 use App\Models\ProductividadMensual;
 use App\Models\Projects\Project;
+use App\Models\Services\Service;
+use App\Models\Services\ServiceCategories;
 use App\Models\Tasks\LogTasks;
 use App\Models\Tasks\Task;
+use App\Models\Tpv\Category;
+use App\Models\Tpv\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Users\User;
@@ -49,10 +53,6 @@ class DashboardController extends Controller
         if ($jornadaActiva) {
             $pausaActiva = $jornadaActiva->pausasActiva();
         }
-
-
-
-
 
         switch($acceso){
             case(1):
@@ -280,6 +280,14 @@ class DashboardController extends Controller
                     }
                 }
                 return view('dashboards.dashboard_comercial', compact('user','diasDiferencia','estadosKit','comisionRestante','ayudas','comisionTramitadas','comisionPendiente', 'comisionCurso', 'pedienteCierre','timeWorkedToday', 'jornadaActiva', 'pausaActiva'));
+
+            case(7):
+                // Obtener categorías activas
+                $categories = Category::where('inactive', 0)->get();
+                // Obtener productos activos
+                $products = Product::where('inactive', 0)->get();
+
+                return view('dashboards.dashboard_tpv', compact('categories', 'products'));
         }
     }
     public function parseFlexibleTime($time) {

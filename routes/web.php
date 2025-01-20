@@ -48,7 +48,9 @@ use App\Http\Controllers\Message\MessageController;
 use App\Http\Controllers\Nominas\NominasController;
 use App\Http\Controllers\Ordenes\OrdenesController;
 use App\Http\Controllers\Portal\PortalClientesController;
+use App\Http\Controllers\Product\ProductsCategoriesController;
 use App\Http\Controllers\Productividad\ProductividadController;
+use App\Http\Controllers\Product\ProductsController;
 use App\Http\Controllers\Settings\UserSettingsController;
 use App\Http\Controllers\Statistics\StatisticsController;
 use App\Http\Controllers\Tesoreria\CategoriaAsociadosController;
@@ -306,6 +308,37 @@ Route::get('/services-categories/edit/{id}', [ServicesCategoriesController::clas
 Route::post('/services-categories/store', [ServicesCategoriesController::class, 'store'])->name('serviciosCategoria.store');
 Route::post('/services-categories/update/{id}', [ServicesCategoriesController::class, 'update'])->name('serviciosCategoria.update');
 Route::post('/services-categories/destroy', [ServicesCategoriesController::class, 'destroy'])->name('serviciosCategoria.delete');
+
+// Products (PRODUCTOS)
+Route::get('/products', [ProductsController::class, 'index'])->name('productos.index');
+Route::get('/products/create', [ProductsController::class, 'create'])->name('productos.create');
+Route::get('/products-show/{id}', [ProductsController::class, 'show'])->name('productos.show');
+Route::get('/products/edit/{id}', [ProductsController::class, 'edit'])->name('productos.edit');
+Route::post('/products/store', [ProductsController::class, 'store'])->name('productos.store');
+Route::post('/products/update/{id}', [ProductsController::class, 'update'])->name('productos.update');
+Route::get('/products/show/{id}', [ProductsController::class, 'show'])->name('productos.show');
+Route::post('/products/destroy', [ProductsController::class, 'destroy'])->name('productos.delete');
+
+// products Categories (CATEGORIA DE PRODUCTOS)
+Route::get('/products-categories', [ProductsCategoriesController::class, 'index'])->name('productosCategoria.index');
+Route::get('/products-categories/create', [ProductsCategoriesController::class, 'create'])->name('productosCategoria.create');
+Route::post('/products-categories/store', [ProductsCategoriesController::class, 'store'])->name('productosCategoria.store');
+Route::get('/products-categories/edit/{id}', [ProductsCategoriesController::class, 'edit'])->name('productosCategoria.edit');
+Route::post('/products-categories/update/{id}', [ProductsCategoriesController::class, 'update'])->name('productosCategoria.update');
+Route::post('/products-categories/destroy', [ProductsCategoriesController::class, 'destroy'])->name('productosCategoria.delete');
+
+//TPV ENdpoints
+Route::get('/categories', function () {
+    return \App\Models\Tpv\Category::where('inactive', 0)->get();
+});
+Route::get('/categories/{id}/products', function ($id) {
+    return \App\Models\Tpv\Product::where('category_id', $id)
+        ->where('inactive', 0)
+        ->get();
+});
+Route::get('/orders/open', function () {
+    return \App\Models\Tpv\Order::where('status', 'open')->get();
+});
 
 // Suppliers (PROVEEDORES)
 Route::get('/suppliers/{supplier}/get-supplier', [App\Http\Controllers\Suppliers\SuppliersController::class, 'getSupplier'])->name('proveedores.getSupplier');
