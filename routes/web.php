@@ -4,6 +4,7 @@ use App\Events\RecargarPagina;
 use App\Http\Controllers\AccionesController;
 use App\Http\Controllers\Alert\AlertController;
 use App\Http\Controllers\Archivos\FileController;
+use App\Http\Controllers\Backup\BackupController;
 use App\Http\Controllers\Bajas\BajaController;
 use App\Http\Controllers\CrmActivities\CrmActivityMeetingController;
 use App\Http\Controllers\Suppliers\SuppliersController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\Petitions\PetitionController;
 use App\Http\Controllers\Budgets\BudgetController;
 use App\Http\Controllers\Tasks\TasksController;
 use App\Http\Controllers\Budgets\BudgetConceptsController;
+use App\Http\Controllers\Calendar\CalendarController;
 use App\Http\Controllers\Contabilidad\CuentasContableController;
 use App\Http\Controllers\Contabilidad\PlanContableController;
 use App\Http\Controllers\Contabilidad\SubCuentasContableController;
@@ -335,6 +337,12 @@ Route::post('/task/update/{id}', [TasksController::class, 'update'])->name('tare
 Route::get('/task/show/{id}', [TasksController::class, 'show'])->name('tarea.show');
 Route::post('/task/destroy', [TasksController::class, 'destroy'])->name('tarea.delete');
 Route::get('/task/calendar/{id}', [TasksController::class, 'calendar'])->name('tarea.calendar');
+
+//Calendar
+Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar.index');
+
+//backups
+Route::get('/backup', [BackupController::class, 'index'])->name('backup.index');
 
 // Dominios
 // Route::get('/dominios', [DominiosController::class, 'index'])->name('dominios.index');
