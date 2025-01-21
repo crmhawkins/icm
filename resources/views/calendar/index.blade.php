@@ -43,9 +43,19 @@
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#calendarFeedModal">
                     Añadir Feed de Calendario
                 </button>
-                    <div id="calendar" class="p-4" style="min-height: 600px; margin-top: 0.75rem; margin-bottom: 0.75rem; overflow-y: auto; border-color:black; border-width: thin; border-radius: 20px;" >
-                        <!-- Aquí se renderizarán las tareas según la vista seleccionada -->
-                    </div>
+                <div class="list-group mt-3">
+                    @foreach($feed as $f)
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            Google Calendar ID: {{ $f['googleCalendarId'] }}
+                            <span>
+                                <button type="button" class="btn btn-danger btn-sm" onclick="deleteFeed('{{ $f['id'] }}')">Eliminar</button>
+                            </span>
+                        </div>
+                    @endforeach
+                </div>
+                <div id="calendar" class="p-4" style="min-height: 600px; margin-top: 0.75rem; margin-bottom: 0.75rem; overflow-y: auto; border-color:black; border-width: thin; border-radius: 20px;" >
+                    <!-- Aquí se renderizarán las tareas según la vista seleccionada -->
+                </div>
             </div>
         </div>
     </section>
@@ -117,6 +127,23 @@
             calendar.render();
         });
 
+        function deleteFeed(id) {
+            if (confirm('¿Estás seguro de que quieres eliminar este feed?')) {
+                fetch(`/calendar-feeds/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => {
+                    if (res.ok) {
+                        window.location.reload();
+                    } else {
+                        alert('Algo salió mal al intentar eliminar el feed.');
+                    }
+                }).catch(error => console.error('Error:', error));
+            }
+        }
 </script>
 @endsection
 

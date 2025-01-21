@@ -13,7 +13,7 @@ class CalendarController extends Controller
      */
     public function index()
     {
-        $feed = Calendar::all()->select('googleCalendarId','color','textColor');
+        $feed = Calendar::all()->toArray();
         return view('calendar.index', compact('feed'));
     }
 
@@ -64,8 +64,13 @@ class CalendarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $feed = Calendar::findOrFail($id);
+        $feed->delete();
+        return redirect()->route('calendar.index')->with('toast', [
+            'icon' => 'success',
+            'mensaje' => 'Feed eliminado correctamente'
+        ]);
     }
 }
