@@ -8,46 +8,77 @@
 @endsection
 
 @section('content')
-    <div class="page-heading card" style="box-shadow: none !important" >
+<div class="page-heading card" style="box-shadow: none !important" >
 
-        {{-- Titulos --}}
-        <div class="page-title card-body">
-            <div class="row justify-content-between">
-                <div class="col-12 col-md-4 order-md-1 order-last">
-                    <h3><i class="bi bi-diagram-2"></i> Calendario</h3>
-                    <p class="text-subtitle text-muted">Google Calendar</p>
-                    {{-- {{$campanias->count()}} --}}
-                </div>
-                <div class="col-12 col-md-4 order-md-2 order-first">
-                    <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Calendario</li>
-                        </ol>
-                    </nav>
-
-                </div>
+    {{-- Titulos --}}
+    <div class="page-title card-body">
+        <div class="row justify-content-between">
+            <div class="col-12 col-md-4 order-md-1 order-last">
+                <h3><i class="bi bi-diagram-2"></i> Calendario</h3>
+                <p class="text-subtitle text-muted">Google Calendar</p>
+                {{-- {{$campanias->count()}} --}}
             </div>
-            {{-- <div class="row mt-3">
-                <div class="col-12 col-md-4 order-md-1 order-last">
-                    @if($campanias->count() >= 0)
-                        <a href="{{route('campania.create')}}" class="btn btn-primary"><i class="fa-solid fa-plus me-2 mx-auto"></i>  Crear campaña</a>
-                    @endif
-                </div>
-            </div> --}}
+            <div class="col-12 col-md-4 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Calendario</li>
+                    </ol>
+                </nav>
+
+            </div>
         </div>
+        {{-- <div class="row mt-3">
+            <div class="col-12 col-md-4 order-md-1 order-last">
+                @if($campanias->count() >= 0)
+                    <a href="{{route('campania.create')}}" class="btn btn-primary"><i class="fa-solid fa-plus me-2 mx-auto"></i>  Crear campaña</a>
+                @endif
+            </div>
+        </div> --}}
+    </div>
 
-        <section class="section pt-4">
-            <div class="card">
-                <div class="card-body">
-                        <div id="calendar" class="p-4" style="min-height: 600px; margin-top: 0.75rem; margin-bottom: 0.75rem; overflow-y: auto; border-color:black; border-width: thin; border-radius: 20px;" >
-                            <!-- Aquí se renderizarán las tareas según la vista seleccionada -->
+    <section class="section pt-4">
+        <div class="card">
+            <div class="card-body">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#calendarFeedModal">
+                    Añadir Feed de Calendario
+                </button>
+                    <div id="calendar" class="p-4" style="min-height: 600px; margin-top: 0.75rem; margin-bottom: 0.75rem; overflow-y: auto; border-color:black; border-width: thin; border-radius: 20px;" >
+                        <!-- Aquí se renderizarán las tareas según la vista seleccionada -->
+                    </div>
+            </div>
+        </div>
+    </section>
+    <!-- Modal para añadir feed de calendario -->
+    <div class="modal fade" id="calendarFeedModal" tabindex="-1" aria-labelledby="calendarFeedModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="calendarFeedModalLabel">Añadir api de Calendario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="feedForm" method="POST" action="{{ route('calendar.store') }}">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="googleCalendarId" class="form-label">Google Calendar ID</label>
+                            <input type="text" class="form-control" id="googleCalendarId" name="googleCalendarId" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="color" class="form-label">Color del Evento</label>
+                            <input type="color" class="form-control p-0" id="color" name="color" value="#377dff">
+                        </div>
+                        <div class="mb-3">
+                            <label for="textColor" class="form-label">Color del Texto</label>
+                            <input type="color" class="form-control p-0" id="textColor" name="textColor" value="#ffffff">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Feed</button>
+                    </form>
                 </div>
             </div>
-        </section>
-
+        </div>
     </div>
+</div>
 @endsection
 
 @section('scripts')
@@ -56,6 +87,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/locales-all.global.min.js"></script>
     @include('partials.toast')
     <script>
+        var feed = @json($feed);
+        console.log(feed);
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var tooltip = document.getElementById('tooltip');
@@ -77,9 +110,8 @@
                     center: 'title',
                     right: 'dayGridMonth,timeGridDay,listWeek'
                 },
-                events: {
-                    googleCalendarId: 'es.spain#holiday@group.v.calendar.google.com'
-                }
+                eventSources:feed,
+
 
         });
             calendar.render();

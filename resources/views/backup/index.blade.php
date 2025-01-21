@@ -31,7 +31,7 @@
                 <form action="" method="">
                     @csrf
                     <div class="mb-3">
-                        <label for="backupFrequency" class="form-label">Frecuencia del Backup</label>
+                        <label for="backupFrequency" class="form-label" style="width: 200px">Frecuencia del Backup</label>
                         <select class="form-select" id="backupFrequency" name="frequency">
                             <option value="daily">Diario</option>
                             <option value="weekly">Semanal</option>

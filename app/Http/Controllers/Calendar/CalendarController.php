@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Calendar;
 
 use App\Http\Controllers\Controller;
+use App\Models\Calendar\Calendar;
 use Illuminate\Http\Request;
 
 class CalendarController extends Controller
@@ -12,7 +13,8 @@ class CalendarController extends Controller
      */
     public function index()
     {
-        return view('calendar.index');
+        $feed = Calendar::all()->select('googleCalendarId','color','textColor');
+        return view('calendar.index', compact('feed'));
     }
 
     /**
@@ -28,7 +30,11 @@ class CalendarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $feed = Calendar::create($request->all());
+        return redirect()->back()->with('toast', [
+            'icon' => 'success',
+            'mensaje' => 'Feed añadido correctamente'
+        ]);
     }
 
     /**
