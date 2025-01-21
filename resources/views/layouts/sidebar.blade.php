@@ -54,7 +54,7 @@
 
                 <li class="sidebar-item {{ request()->routeIs('calendar.index') ? 'active' : '' }}">
                     <a href="{{route('calendar.index')}}" class='sidebar-link'>
-                        <i class="fa-solid fa-file-invoice-dollar fs-5"></i>
+                        <i class="fa-solid fa-calendar fs-5"></i>
                         <span>Calendario</span>
                     </a>
                 </li>
@@ -229,8 +229,6 @@
                                 <span>Cofiguracion Empresa</span>
                             </a>
                         </li>
-                    </ul>
-                    <ul class="submenu" style="{{ $cofiguracionActive ? 'display:block;' : 'display:none;' }}">
                         <li class="submenu-item {{ request()->routeIs('backup.index') ? 'active' : '' }}">
                             <a href="{{route('backup.index')}}" class='sidebar-link'>
                                 <i class="fa-solid fa-gears fs-5"></i>
