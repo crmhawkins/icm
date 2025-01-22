@@ -41,8 +41,12 @@
         <div class="card">
             <div class="card-body">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#calendarFeedModal">
-                    Añadir Feed de Calendario
+                    Añadir Google Calendar
                 </button>
+
+                <div id="calendar" class="p-4" style="min-height: 600px; margin-top: 0.75rem; margin-bottom: 0.75rem; overflow-y: auto; border-color:black; border-width: thin; border-radius: 20px;" >
+                    <!-- Aquí se renderizarán las tareas según la vista seleccionada -->
+                </div>
                 <div class="list-group mt-3">
                     @foreach($feed as $f)
                         <div class="list-group-item d-flex justify-content-between align-items-center">
@@ -52,9 +56,6 @@
                             </span>
                         </div>
                     @endforeach
-                </div>
-                <div id="calendar" class="p-4" style="min-height: 600px; margin-top: 0.75rem; margin-bottom: 0.75rem; overflow-y: auto; border-color:black; border-width: thin; border-radius: 20px;" >
-                    <!-- Aquí se renderizarán las tareas según la vista seleccionada -->
                 </div>
             </div>
         </div>
@@ -128,21 +129,49 @@
         });
 
         function deleteFeed(id) {
-            if (confirm('¿Estás seguro de que quieres eliminar este feed?')) {
-                fetch(`/calendar-feeds/${id}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Content-Type': 'application/json'
-                    }
-                }).then(res => {
-                    if (res.ok) {
-                        window.location.reload();
-                    } else {
-                        alert('Algo salió mal al intentar eliminar el feed.');
-                    }
-                }).catch(error => console.error('Error:', error));
-            }
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`/calendar-feeds/${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(response => {
+                        if (response.ok) {
+                            Swal.fire(
+                                '¡Eliminado!',
+                                'El feed ha sido eliminado.',
+                                'success'
+                            ).then(() => {
+                                window.location.reload();
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                'Algo salió mal al intentar eliminar el feed.',
+                                'error'
+                            );
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                        Swal.fire(
+                            'Error!',
+                            'Algo salió mal al intentar eliminar el feed.',
+                            'error'
+                        );
+                    });
+                }
+            })
         }
 </script>
 @endsection
