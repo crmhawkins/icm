@@ -67,10 +67,10 @@ class CalendarController extends Controller
     public function destroy($id)
     {
         $feed = Calendar::findOrFail($id);
+        if(!isset($feed)){
+            return response()->json(['ok' => false ]);
+        }
         $feed->delete();
-        return redirect()->route('calendar.index')->with('toast', [
-            'icon' => 'success',
-            'mensaje' => 'Feed eliminado correctamente'
-        ]);
+        return response()->json(['ok' => true]);
     }
 }
