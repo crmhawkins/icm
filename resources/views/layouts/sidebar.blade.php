@@ -723,31 +723,19 @@
         </div>
         {{-- <button class="sidebar-toggler btn x"><i data-feather="x"></i></button> --}}
         <button type="button" class="btn btn-outline-secondary mt-1" data-bs-toggle="modal" data-bs-target="#textoModal">
-            Mostrar Texto
+            Ficha técnica
           </button>
         </div>
     </div>
     <div class="modal fade" id="textoModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Texto del Modal</h5>
+                    <h5 class="modal-title" id="modalLabel">Datasheet</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    En {{env('EMPRESA_DESAROLLADORA')}} <b>desarrollamos y ofrecemos</b> una solución integral para la gestión y emisión de facturas electrónicas diseñada para empresas que buscan eficiencia y cumplimiento normativo. Nuestra plataforma ofrece una interfaz amigable y potentes herramientas para automatizar el proceso de facturación, asegurando la conformidad con las regulaciones locales e internacionales.
-                    <br><br>
-                    <b>Funcionalidades Clave:</b>
-                    <br>•<b>Gestión de Facturas Ilimitadas:</b> Cree y gestione un número ilimitado de facturas sin restricciones adicionales, optimizando su flujo de trabajo de facturación.
-                    <br>•<b>Alta de Clientes Ilimitada:</b> Registre y administre una cantidad ilimitada de clientes, permitiendo una expansión y adaptabilidad constante a las necesidades de su negocio.
-                    <br>•<b>Alta de Productos y Servicios Ilimitada:</b> Añada y actualice continuamente productos y servicios sin enfrentar limitaciones en la cantidad, lo que facilita la adaptación a las dinámicas de mercado y la expansión del inventario.
-                    <br>•<b>Automatización y Personalización:</b> Automatice procesos repetitivos y personalice facturas con su logotipo y datos empresariales, mejorando la presentación y profesionalismo.
-                    <br>•<b>Seguridad y Conformidad:</b> Garantizamos la seguridad de sus datos mediante cifrado avanzado y nos aseguramos de que nuestra plataforma esté siempre actualizada con las últimas normativas de facturación electrónica.
-                    <br><br>
-                    <b>Beneficios:</b>
-                    <br>•<b>Eficiencia Operativa:</b> Reduzca el tiempo de gestión de facturas y clientes con nuestras herramientas automatizadas.
-                    <br>•<b>Escalabilidad:</b> Nuestro sistema se adapta a empresas de cualquier tamaño y puede crecer según sus necesidades sin incurrir en costos adicionales por volumen de datos.
-                    <br>•<b>Acceso Remoto:</b> Acceda a su sistema de facturación desde cualquier lugar y en cualquier momento, facilitando el manejo remoto y en tiempo real de su negocio.
+                    <iframe src="{{env('DATASHEET')}}" width="100%" height="600px" style="border: none;"></iframe>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
