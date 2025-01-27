@@ -40,9 +40,14 @@
     <section class="section pt-4">
         <div class="card">
             <div class="card-body">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#calendarFeedModal">
-                    Añadir Google Calendar
-                </button>
+                <div class="d-flex space-around justify-content-between">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#calendarFeedModal">
+                        Añadir Google Calendar
+                    </button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#calendarApiModal">
+                        Api Key
+                    </button>
+                </div>
 
                 <div id="calendar" class="p-4" style="min-height: 600px; margin-top: 0.75rem; margin-bottom: 0.75rem; overflow-y: auto; border-color:black; border-width: thin; border-radius: 20px;" >
                     <!-- Aquí se renderizarán las tareas según la vista seleccionada -->
@@ -89,6 +94,26 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="calendarApiModal" tabindex="-1" aria-labelledby="calendarApiModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="calendarApiModalLabel">Añadir api de Google</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="feedForm" method="POST" action="{{ route('api.store') }}">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="api_key" class="form-label">Api Key Google</label>
+                            <input type="text" class="form-control" id="api_key" name="api_key" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Api</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 
@@ -99,12 +124,14 @@
     @include('partials.toast')
     <script>
         var feed = @json($feed);
+        var api = @json($api->api_key);
+
         console.log(feed);
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var tooltip = document.getElementById('tooltip');
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                googleCalendarApiKey: '{{ env('GOOGLE_API_KEY') }}',
+                googleCalendarApiKey: api,
                 initialView: 'dayGridMonth',
                 locale: 'es',
                 navLinks: true,

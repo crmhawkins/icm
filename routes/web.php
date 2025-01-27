@@ -343,6 +343,8 @@ Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar.in
 Route::post('/calendar-feeds', [CalendarController::class, 'store'])->name('calendar.store');
 Route::delete('/calendar-feeds/{id}', [CalendarController::class, 'destroy'])->name('calendar-feeds.destroy');
 
+//
+Route::post('/store/api', [CalendarController::class, 'storeApi'])->name('api.store');
 //backups
 Route::get('/backup', [BackupController::class, 'index'])->name('backup.index');
 
