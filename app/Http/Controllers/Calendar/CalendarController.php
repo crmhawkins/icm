@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Calendar;
 
 use App\Http\Controllers\Controller;
+use App\Models\Calendar\Api;
 use App\Models\Calendar\Calendar;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class CalendarController extends Controller
     public function index()
     {
         $feed = Calendar::all()->toArray();
-        return view('calendar.index', compact('feed'));
+        $api = Api::first();
+        return view('calendar.index', compact('feed','api'));
     }
 
     /**
@@ -40,9 +42,18 @@ class CalendarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function storeApi(Request $request)
     {
-        //
+        $api = Api::first();
+        if(!isset($api)){
+            $api = Api::create($request->all());
+        }else{
+            $api->update($request->all());
+        }
+        return redirect()->back()->with('toast', [
+            'icon' => 'success',
+            'mensaje' => 'API añadida correctamente'
+        ]);
     }
 
     /**
